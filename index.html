@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Manchetes de Jornal</title>
+
+    <!-- Carregando o Tailwind CSS: Em vez de escrever CSS tradicional, usamos classes utilitárias diretamente no HTML.
+         Isso acelera o desenvolvimento e mantém os estilos consistentes. O CDN é uma forma fácil de incluir o framework. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Folha de Estilos Personalizada: Link para o arquivo 'style.css'.
+         Usamos este arquivo para estilos que são difíceis de fazer com Tailwind, como importar fontes customizadas. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Container principal que centraliza o conteúdo e adiciona espaçamento nas laterais. -->
+    <div class="max-w-[1700px] mx-auto p-4 md:p-8">
+
+        <!-- Cabeçalho da Página: Apresenta o título e uma breve descrição da aplicação.
+             A classe 'headline-font' vem do nosso CSS customizado para dar um estilo de jornal ao título. -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 headline-font">Editor de Manchetes de Jornal</h1>
+            <p class="text-lg text-gray-600 mt-2">Personalize a seção de notícias em tempo real.</p>
+        </header>
+
+        <!-- Layout Principal: Um container flexível que organiza o conteúdo em duas colunas lado a lado em telas grandes ('lg:flex-row').
+             Em telas pequenas, as colunas ficam uma sobre a outra ('flex-col'). -->
+        <main class="flex flex-col lg:flex-row gap-8">
+
+            <!-- 4. COLUNA DA ESQUERDA: PAINEL DO EDITOR -->
+            <!-- Esta coluna contém todos os formulários e controles que o usuário usa para personalizar as manchetes. -->
+            <div id="editor-panel" class="w-full lg:w-1/2">
+
+                <!-- Seção de Estilos Gerais -->
+                <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+                    <h3 class="text-xl font-bold border-b pb-2 mb-4 text-gray-800">Estilos Gerais da Seção</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <!-- Cada input tem um 'id' único. O JavaScript usa esses IDs para "ouvir" as mudanças e atualizar a visualização. -->
+                            <label for="section-bg-color" class="block mb-2 font-medium text-gray-700">Cor de
+                                Fundo</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="section-bg-color">
+                                <input type="text" id="section-bg-color-text"
+                                    class="w-full p-2 border border-gray-300 rounded-md">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="section-border-radius"
+                                class="block mb-2 font-medium text-gray-700">Arredondamento (px)</label>
+                            <input type="number" id="section-border-radius" min="0" max="50"
+                                class="w-full p-2 border border-gray-300 rounded-md">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção da Imagem Principal -->
+                <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+                    <h3 class="text-xl font-bold border-b pb-2 mb-4 text-gray-800">Imagem Principal</h3>
+                    <div>
+                        <label for="image-url" class="block mb-2 font-medium text-gray-700">URL da Imagem</label>
+                        <input type="url" id="image-url" placeholder="https://exemplo.com/imagem.jpg"
+                            class="w-full p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div>
+                            <label for="image-alt" class="block mb-2 font-medium text-gray-700">Texto
+                                Alternativo</label>
+                            <input type="text" id="image-alt" class="w-full p-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label for="image-border-radius" class="block mb-2 font-medium text-gray-700">Arredondamento
+                                (px)</label>
+                            <input type="number" id="image-border-radius" min="0" max="50"
+                                class="w-full p-2 border border-gray-300 rounded-md">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção dos Editores de Card -->
+                <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">Manchetes</h3>
+                        <!-- Botão para adicionar novos cards. O JavaScript escuta o clique neste botão. -->
+                        <button id="add-card-btn"
+                            class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                            Adicionar Card
+                        </button>
+                    </div>
+                    <!-- Container Vazio: Este é um ponto-chave! O HTML inicial não contém os editores dos cards.
+                         O JavaScript irá gerar e "injetar" dinamicamente os formulários de cada card aqui dentro. -->
+                    <div id="card-editors-container" class="space-y-4"></div>
+                </section>
+            </div>
+
+            <!-- 5. COLUNA DA DIREITA: PAINEL DE VISUALIZAÇÃO -->
+            <!-- Esta coluna mostra o resultado final das edições em tempo real. -->
+            <div class="w-full lg:w-1/2">
+                <!-- 'sticky top-8' faz com que a caixa de visualização "grude" no topo da tela quando o usuário rola a página para baixo. -->
+                <div class="sticky top-8">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Visualização</h2>
+                    <div class="w-full h-auto min-h-[600px] bg-gray-200 p-4 rounded-lg shadow-inner overflow-hidden">
+
+                        <!-- Container da Pré-visualização: O JavaScript irá manipular os elementos dentro desta div
+                             para refletir as mudanças feitas no painel do editor. -->
+                        <div id="headlines-section" class="shadow-lg overflow-hidden p-6 transition-all duration-300">
+                            <!-- A imagem de pré-visualização. O 'src' e 'alt' serão definidos pelo JavaScript. -->
+                            <img id="preview-image" src="" alt="" class="w-full h-auto object-cover mb-6">
+                            <!-- Container Vazio para os Cards: Assim como no editor, o JavaScript irá gerar e
+                                 renderizar os cards de notícia aqui, com base nos dados do estado da aplicação. -->
+                            <div id="preview-cards" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- O script 'script.js' é carregado no final do body. O atributo 'defer' é uma otimização importante:
+         ele diz ao navegador para baixar o script em paralelo, mas só executá-lo depois que todo o HTML for analisado.
+         Isso evita que a página "trave" enquanto o script carrega e garante que todos os elementos HTML já existam quando o script for executado. -->
+    <script src="script.js" defer></script>
+</body>
+
+</html>

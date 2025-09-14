@@ -1,0 +1,60 @@
+/*
+  ARQUIVO DE ESTILOS PERSONALIZADOS (style.css)
+  ---------------------------------------------
+  Este arquivo complementa o Tailwind CSS. Enquanto o Tailwind é ótimo para criar layouts
+  e aplicar estilos rapidamente com classes no HTML, usamos este CSS para tarefas como:
+  1. Importar recursos externos, como fontes customizadas.
+  2. Definir estilos globais para a página (ex: fonte padrão no `body`).
+  3. Criar estilos mais complexos ou específicos que seriam difíceis de fazer apenas com Tailwind.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+}
+
+/* 1. CLASSE UTILITÁRIA PERSONALIZADA */
+/* Criamos nossa própria classe, `.headline-font`, para aplicar a fonte de destaque.
+   Isso funciona como uma classe do Tailwind: basta adicionar `class="headline-font"` a um elemento HTML (como o `<h1>`)
+   para que ele use a fonte 'Playfair Display'.
+*/
+.headline-font {
+    font-family: 'Playfair Display', serif;
+}
+
+/* 2. ESTILOS PARA COMPONENTES ESPECÍFICOS (SELETOR DE COR) */
+/* O seletor de cor padrão (`<input type="color">`) é visualmente diferente em cada navegador.
+   Estas regras servem para criar um visual customizado e consistente para ele.
+*/
+.color-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-input-wrapper input[type="color"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Remove o estilo padrão para outros navegadores. */
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: transparent;
+    /* O fundo é transparente, pois a cor será mostrada pela "amostra". */
+}
+
+/* Este é um "pseudo-elemento" que estiliza a pequena caixa de amostra de cor DENTRO do input.
+   Isso nos permite, por exemplo, adicionar uma borda e arredondar os cantos da amostra de cor,
+   deixando o componente com um visual mais polido e integrado ao resto do design.
+*/
+.color-input-wrapper input[type="color"]::-webkit-color-swatch {
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+}
