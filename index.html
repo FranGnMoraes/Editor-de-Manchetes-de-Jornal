@@ -108,8 +108,10 @@
                         <!-- Container da Pré-visualização: O JavaScript irá manipular os elementos dentro desta div
                              para refletir as mudanças feitas no painel do editor. -->
                         <div id="headlines-section" class="shadow-lg overflow-hidden p-6 transition-all duration-300">
-                            <!-- A imagem de pré-visualização. O 'src' e 'alt' serão definidos pelo JavaScript. -->
-                            <img id="preview-image" src="" alt="" class="w-full h-auto object-cover mb-6">
+                            <!-- A imagem de pré-visualização. O 'src' inicial é um placeholder para garantir HTML válido. O JS o substituirá. -->
+                            <img id="preview-image"
+                                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                alt="" class="w-full h-auto object-cover mb-6">
                             <!-- Container Vazio para os Cards: Assim como no editor, o JavaScript irá gerar e
                                  renderizar os cards de notícia aqui, com base nos dados do estado da aplicação. -->
                             <div id="preview-cards" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
