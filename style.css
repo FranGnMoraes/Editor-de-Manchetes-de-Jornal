@@ -8,8 +8,6 @@
   3. Criar estilos mais complexos ou específicos que seriam difíceis de fazer apenas com Tailwind.
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
-
 
 body {
     font-family: 'Roboto', sans-serif;

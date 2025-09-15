@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // O HTML interno do card é criado usando os dados do objeto 'card'.
             cardElement.innerHTML = `
-                <h4 class="${titleClasses}" style="color: ${card.titleColor};">${card.title}</h4>
+                <h3 class="${titleClasses}" style="color: ${card.titleColor};">${card.title}</h3>
                 <p class="${subtitleClasses}" style="color: ${card.subtitleColor};">${card.subtitle}</p>
             `;
             elements.previewCardsContainer.appendChild(cardElement);
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // com os valores atuais do 'state' para aquele card específico.
             editorEl.innerHTML = `
                 <div class="flex justify-between items-center mb-4">
-                    <h4 class="font-bold text-lg text-gray-700">Card ${index + 1}</h4>
+                    <h3 class="font-bold text-lg text-gray-700">Card ${index + 1}</h3>
                     <button class="remove-card-btn text-red-500 hover:text-red-700 font-semibold" data-card-id="${card.id}">Remover</button>
                 </div>
                 <div class="mb-2"><label for="card-title-${card.id}" class="text-sm font-medium">Título</label><input type="text" id="card-title-${card.id}" class="card-title w-full p-2 border border-gray-300 rounded-md mt-1" value="${card.title}"></div>
